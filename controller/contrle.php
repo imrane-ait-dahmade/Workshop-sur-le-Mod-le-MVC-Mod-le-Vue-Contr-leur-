@@ -23,9 +23,34 @@ include_once "../modal/ajouter_produit.php";
  
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-ajouter($_POST['nom'],$_POST['prix'],$_POST['description'],$conn);
+    // Valider les données
+    $name = trim($_POST['nom']);
+    $price = trim($_POST['prix']);
+    $description = trim($_POST['description']);
 
+    if (!empty($name) && !empty($price) && !empty($description)) {
+        // Ajouter le produit
+        ajouter($name, $price, $description, $conn);
+    } else {
+        echo "Tous les champs sont obligatoires.";
+    }
 }
 
 
+include_once "../modal/affichage_produits.php";
+require_once "../vue/page.php";
+$produits = affichage($conn);
+
+if (!empty($produits)) {
+    // foreach ($produits as $produit) {
+    //     echo "Nom : " . htmlspecialchars($produit['nom']) . "<br>";
+    //     echo "Prix : " . htmlspecialchars($produit['prix']) . " €<br>";
+    //     echo "Description : " . htmlspecialchars($produit['description']) . "<br><br>";
+    // }
+
+} else {
+    echo "Aucun produit trouvé.";
+}
+
+$conn->close();
 ?>

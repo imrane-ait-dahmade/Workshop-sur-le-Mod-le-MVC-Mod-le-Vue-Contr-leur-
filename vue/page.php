@@ -16,7 +16,7 @@ require_once "../controller/contrle.php";
 
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3  bg-gray-100 flex items-center justify-center min-h-screen">
   
-  <form id="inscription-form" action="" method="POST" class="space-y-4">
+  <form id="inscription-form" action="../controller/contrle.php" method="POST" class="space-y-4">
     <div id="place_name">
       <label for="nom" class="block text-gray-700 font-bold mb-2">nom de produit</label>
       <input type="text" id="nom" name="nom" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
@@ -47,7 +47,18 @@ require_once "../controller/contrle.php";
                 </tr>
             </thead>
             <tbody>
-               
+            <?php
+
+if (!empty($produits)) {
+    foreach ($produits as $produit) {
+        echo "Nom : " . htmlspecialchars($produit['nom']) . "<br>";
+        echo "Prix : " . htmlspecialchars($produit['prix']) . " €<br>";
+        echo "Description : " . htmlspecialchars($produit['description']) . "<br><br>";
+    }
+} else {
+    echo "Aucun produit trouvé.";
+}
+?>
             </tbody>
         </table>
     </div>

@@ -7,3 +7,6 @@ description TEXT ,
 prix INT 
 );
 
+USE sotkage;
+ALTER Table produit 
+ADD COLUMN id int PRIMARY KEY AUTO_INCREMENT;
