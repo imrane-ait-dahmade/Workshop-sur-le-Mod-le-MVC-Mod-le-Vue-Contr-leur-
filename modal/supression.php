@@ -16,6 +16,6 @@
         else {
             die("Erreur lors de la préparation : " . $conn->error);
         }
-        
+
  }
 ?>

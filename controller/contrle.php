@@ -19,9 +19,9 @@ function dd(...$var) {
         echo '</code>';
         echo '</pre>';
     }
-    
     die();
 }
+
 
 
  
@@ -51,6 +51,17 @@ if (!empty($produits)) {
 }
 
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_id'])) {
+    // Récupérer l'identifiant du produit à supprimer
+    $id = intval($_POST['delete_id']);
+    
+    // Appeler la fonction de suppression
+    if (delete($conn, $id)) {
+        $message = "Produit supprimé avec succès.";
+    } else {
+        $message = "Erreur lors de la suppression.";
+    }
+}
 
 
 $conn->close();
