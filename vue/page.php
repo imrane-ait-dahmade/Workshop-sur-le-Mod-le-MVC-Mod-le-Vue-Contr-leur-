@@ -50,11 +50,20 @@ require_once "../controller/contrle.php";
             <?php
 
 if (!empty($produits)) {
-    foreach ($produits as $produit) {
-        echo "Nom : " . htmlspecialchars($produit['nom']) . "<br>";
-        echo "Prix : " . htmlspecialchars($produit['prix']) . " €<br>";
-        echo "Description : " . htmlspecialchars($produit['description']) . "<br><br>";
-    }
+  foreach ($produits as $produit) {
+    echo "<tr>";
+    echo "<td class='px-4 py-2 border border-gray-300'>" . htmlspecialchars($produit['nom']) . "</td>";
+    echo "<td class='px-4 py-2 border border-gray-300'>" . htmlspecialchars($produit['prix']) . " €</td>";
+    echo "<td class='px-4 py-2 border border-gray-300'>" . htmlspecialchars($produit['description']) . "</td>";
+    echo "<td class='px-4 py-2 border border-gray-300 flex justify-center'>  
+        <form method='POST' style='display:inline;'>
+            <input type='hidden' name='delete_id' value='" . htmlspecialchars($produit['id']) . "'>
+            <button type='submit' class='bg-red-500 text-white px-4 py-2 rounded'>Supprimer</button>
+        </form>
+    </td>";
+    echo "</tr>";
+}
+
 } else {
     echo "Aucun produit trouvé.";
 }
